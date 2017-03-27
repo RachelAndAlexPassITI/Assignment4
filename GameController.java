@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
+import java.nio.file.Files; 
 
 
 /**
@@ -46,6 +47,18 @@ public class GameController implements ActionListener {
         catch (FileNotFoundException e)
         {
             gameModel = new GameModel(size);
+            try{
+                Files.delete("savedGame.ser"); 
+            }
+            catch(IOException e){
+                System.out.println("IOException in GameController."); 
+            }
+        }
+        catch (IOException e){
+            System.out.println("IOException in GameController."); 
+        }
+        catch (ClassNotFoundException e){
+            System.out.println("Class not found in GameController."); 
         }
         
         undoStack=new GenericLinkedStack<GameModel>();
@@ -92,7 +105,15 @@ public class GameController implements ActionListener {
             JButton clicked = (JButton)(e.getSource());
 
             if (clicked.getText().equals("Quit")) {
-                 System.exit(0);
+                try{
+                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("savedGame.ser"));
+                    os.writeObject(gameModel); 
+                    os.close(); 
+                }
+                catch(IOException e){
+                    System.out.println("IOException in GameController"); 
+                }
+                System.exit(0);
              } else if (clicked.getText().equals("Reset")){
                 reset();
              }
