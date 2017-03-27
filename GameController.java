@@ -47,12 +47,15 @@ public class GameController implements ActionListener {
         catch (FileNotFoundException f)
         {
             gameModel = new GameModel(size);
-            try{
+          //  try{
                // Files.delete(savedGame.ser); 
-            }
-            catch(IOException g){
-                System.out.println("IOException in GameController."); 
-            }
+          //  }
+           // catch(IOException g){
+              ///  System.out.println("IOException in GameController."); 
+          //  }
+        }
+        catch (IOException f){
+            System.out.println("IOException in GameController."); 
         }
         catch (ClassNotFoundException f){
             System.out.println("Class not found in GameController."); 
