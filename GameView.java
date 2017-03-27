@@ -50,7 +50,7 @@ public class GameView extends JFrame {
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setLayout(new GridLayout(gameModel.getSize(), gameModel.getSize()));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         board = new DotButton[gameModel.getSize()][gameModel.getSize()];
 
         for (int row = 0; row < gameModel.getSize(); row++) {
@@ -78,15 +78,6 @@ public class GameView extends JFrame {
         control.add(buttonReset);
         control.add(buttonExit);
 
-        JPanel southPanel = new JPanel();
-        southPanel.setLayout(new GridLayout(2,1));
-        southPanel.add(control);
-        southPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 10));
-        southPanel.setBackground(Color.WHITE);
-        add(southPanel, BorderLayout.SOUTH);
-
-        JPanel northPanel = new JPanel();
-        northPanel.setLayout(new GridLayout(3,1));
         JButton undoButton=new JButton("Undo");
         JButton redoButton=new JButton("Redo");
         JButton settingsButton=new JButton("Settings");
@@ -96,12 +87,22 @@ public class GameView extends JFrame {
         undoButton.addActionListener(gameController);
         redoButton.addActionListener(gameController);
         settingsButton.addActionListener(gameController);
-        northPanel.add(undoButton);
-        northPanel.add(redoButton);
-        northPanel.add(settingsButton);
 
-        add(northPanel, BorderLayout.NORTH);
-        System.out.println("North Panel added");
+        JPanel options=new JPanel();
+        options.setBackground(Color.WHITE);
+        options.add(undoButton);
+        options.add(redoButton);
+        options.add(settingsButton);
+        options.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        add(options, BorderLayout.NORTH);
+
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new GridLayout(2,1));
+        southPanel.add(control);
+        southPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 10));
+        southPanel.setBackground(Color.WHITE);
+        add(southPanel, BorderLayout.SOUTH);
+
 
 
     	pack();
