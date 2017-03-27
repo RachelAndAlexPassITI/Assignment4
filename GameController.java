@@ -4,8 +4,7 @@ import java.util.LinkedList;
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
-import java.nio.file.Files; 
-
+import java.nio.*; 
 
 /**
  * The class <b>GameController</b> is the controller of the game. It has a method
@@ -41,31 +40,37 @@ public class GameController implements ActionListener {
         try
         {
            ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
-           gameModel = (GameModel) is.readObject(); 
+           gameModel = (GameModel) is.readObject();
            is.close(); 
+            
         }
+        /*
         catch (FileNotFoundException f)
         {
             gameModel = new GameModel(size);
-          //  try{
-               // Files.delete(savedGame.ser); 
-          //  }
-           // catch(IOException g){
-              ///  System.out.println("IOException in GameController."); 
-          //  }
+            try{
+                Files.delete(savedGame.ser); 
+            }
+            catch(IOException g){
+                System.out.println("IOException in GameController."); 
+            }
         }
+        */
+        
         catch (IOException f){
-            System.out.println("IOException in GameController."); 
+            gameModel = new GameModel(size);
         }
+
         catch (ClassNotFoundException f){
             System.out.println("Class not found in GameController."); 
+            gameModel = new GameModel(size); 
         }
         
         undoStack=new GenericLinkedStack<GameModel>();
         redoStack=new GenericLinkedStack<GameModel>();
+        flood(); 
         gameView = new GameView(gameModel, this);
-        flood();
-        gameView.update();
+        gameView.update(); 
 
     }
 
@@ -94,7 +99,6 @@ public class GameController implements ActionListener {
                 gameModel.capture(((DotButton)(e.getSource())).getRow(), ((DotButton)(e.getSource())).getColumn());
                 undoStack.push((GameModel)gameModel.clone());
                 gameView.update();
-
             }
 
             else
@@ -111,9 +115,10 @@ public class GameController implements ActionListener {
                     os.close(); 
                 }
                 catch(IOException f){
-                    System.out.println("IOException in GameController"); 
+                    System.out.println("IO exception but exiting because fuck you"); 
+                    System.exit(0); 
                 }
-                System.exit(0);
+                
              } else if (clicked.getText().equals("Reset")){
                 reset();
              }
