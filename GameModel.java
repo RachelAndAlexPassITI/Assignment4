@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.io.*;
 
 /**
  * The class <b>GameModel</b> holds the model, the state of the systems. 

@@ -48,9 +48,9 @@ public class GameController implements ActionListener {
         {
             gameModel = new GameModel(size);
             try{
-                Files.delete(savedGame.ser); 
+               // Files.delete(savedGame.ser); 
             }
-            catch(IOException f){
+            catch(IOException g){
                 System.out.println("IOException in GameController."); 
             }
         }
