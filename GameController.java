@@ -54,9 +54,6 @@ public class GameController implements ActionListener {
                 System.out.println("IOException in GameController."); 
             }
         }
-        catch (IOException f){
-            System.out.println("IOException in GameController."); 
-        }
         catch (ClassNotFoundException f){
             System.out.println("Class not found in GameController."); 
         }
