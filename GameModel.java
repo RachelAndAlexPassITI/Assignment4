@@ -100,7 +100,7 @@ public class GameModel implements Cloneable, Serializable{
 
     	// initially, the top left DotInfo is captured
         initialDot=false;        
-        currentSelectedColor = model[0][0].getColor();
+       // currentSelectedColor = model[0][0].getColor();
 
     	numberOfSteps = 0;
         numberCaptured = 0;
@@ -201,7 +201,11 @@ public class GameModel implements Cloneable, Serializable{
     public void capture(int i, int j){
  		model[i][j].setCaptured(true);
         System.out.println(model[i][j].getColor());
-        initialDot=true;
+        if(initialDot==false)
+        {
+            initialDot=true;
+            currentSelectedColor=model[i][j].getColor();
+        }
         numberCaptured++;
     }
 
