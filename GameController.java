@@ -36,16 +36,18 @@ public class GameController implements ActionListener {
      *            the size of the board on which the game will be played
      */
     public GameController(int size) {
+        String fileName = "savedGame.ser"; 
         try
         {
-            File file=new File("SavedGame.ser");
-            FileReader fr=new FileReader(file);
-
+           ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
+           gameModel = (GameModel) is.readObject(); 
+           is.close(); 
         }
         catch (FileNotFoundException e)
         {
             gameModel = new GameModel(size);
         }
+        
         undoStack=new GenericLinkedStack<GameModel>();
         redoStack=new GenericLinkedStack<GameModel>();
         gameView = new GameView(gameModel, this);

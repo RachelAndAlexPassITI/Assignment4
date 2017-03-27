@@ -15,7 +15,7 @@ import java.util.Random;
  *
  * @author Guy-Vincent Jourdan, University of Ottawa
  */
-public class GameModel implements Cloneable{
+public class GameModel implements Cloneable, Serializable{
 
     private boolean diagonal;
     private boolean torus;
