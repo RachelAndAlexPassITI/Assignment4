@@ -20,6 +20,10 @@ public class GameView extends JFrame {
      */
     private DotButton[][] board;
 
+    private JButton redoButton;
+
+    private JButton undoButton;
+
  
     /**
      * Reference to the model of the game
@@ -78,8 +82,8 @@ public class GameView extends JFrame {
         control.add(buttonReset);
         control.add(buttonExit);
 
-        JButton undoButton=new JButton("Undo");
-        JButton redoButton=new JButton("Redo");
+        undoButton=new JButton("Undo");
+        redoButton=new JButton("Redo");
         JButton settingsButton=new JButton("Settings");
         undoButton.setFocusPainted(false);
         redoButton.setFocusPainted(false);
@@ -87,6 +91,8 @@ public class GameView extends JFrame {
         undoButton.addActionListener(gameController);
         redoButton.addActionListener(gameController);
         settingsButton.addActionListener(gameController);
+        undoButton.setEnabled(false);
+        redoButton.setEnabled(false);
 
         JPanel options=new JPanel();
         options.setBackground(Color.WHITE);
@@ -102,8 +108,6 @@ public class GameView extends JFrame {
         southPanel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 10));
         southPanel.setBackground(Color.WHITE);
         add(southPanel, BorderLayout.SOUTH);
-
-
 
     	pack();
     	//setResizable(false);
@@ -130,6 +134,24 @@ public class GameView extends JFrame {
             scoreLabel.setText("Number of steps: " + gameModel.getNumberOfSteps());
         else
             scoreLabel.setText("Select Initial Dot");
+
+        if(gameController.undoStack.getSize()>1)
+        {
+            undoButton.setEnabled(true);
+        }
+        else
+        {
+            undoButton.setEnabled(false);
+        }
+
+        if(gameController.redoStack.getSize()>0)
+        {
+            redoButton.setEnabled(true);
+        }
+        else
+        {
+            redoButton.setEnabled(false);
+        }
         repaint();
     }
 
