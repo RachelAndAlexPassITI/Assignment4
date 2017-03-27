@@ -105,7 +105,6 @@ public class GameController implements ActionListener {
             else if(clicked.getText().equals("Settings"))
             {
                 openSettingsPane();
-                undoStack.push((GameModel)gameModel.clone());
             }
         } 
     }
@@ -117,6 +116,7 @@ public class GameController implements ActionListener {
         System.out.println(gameModel);
         gameView.setGameModel(gameModel);
         gameView.update();
+        System.out.println("End of undo: "+gameModel.getDiagonal());
 
     }
 
@@ -135,6 +135,10 @@ public class GameController implements ActionListener {
         JRadioButton torusButton=new JRadioButton("Torus", gameModel.getTorus());
         JRadioButton orthButton=new JRadioButton("Orthongonal", gameModel.getOrthogonal());
         JRadioButton diagButton=new JRadioButton("Diagonals", gameModel.getDiagonal());
+        System.out.println("Start of settings pane: "+gameModel.getDiagonal());
+        System.out.println("Orth: "+gameModel.getOrthogonal());
+
+
 
         ButtonGroup group1=new ButtonGroup();
         group1.add(planeButton);
@@ -169,6 +173,10 @@ public class GameController implements ActionListener {
             gameModel.setDiagonal(true);
         else
             gameModel.setDiagonal(false);
+
+        System.out.println("End of settings pane: "+gameModel.getDiagonal());
+        System.out.println("Orth: "+gameModel.getOrthogonal());
+        undoStack.push((GameModel)gameModel.clone());
 
 
     }

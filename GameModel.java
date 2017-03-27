@@ -333,6 +333,14 @@ public class GameModel implements Cloneable{
             {
                 cloned.setOrthogonal(true);
             }
+            if(!this.orthogonal)
+            {
+                cloned.setOrthogonal(false);
+            }
+            if(!this.plane)
+            {
+                cloned.setPlane(false);
+            }
             if(this.initialDot)
             {
                 cloned.setInitialDot(true);
