@@ -44,20 +44,20 @@ public class GameController implements ActionListener {
            gameModel = (GameModel) is.readObject(); 
            is.close(); 
         }
-        catch (FileNotFoundException e)
+        catch (FileNotFoundException f)
         {
             gameModel = new GameModel(size);
             try{
-                Files.delete("savedGame.ser"); 
+                Files.delete(savedGame.ser); 
             }
-            catch(IOException e){
+            catch(IOException f){
                 System.out.println("IOException in GameController."); 
             }
         }
-        catch (IOException e){
+        catch (IOException f){
             System.out.println("IOException in GameController."); 
         }
-        catch (ClassNotFoundException e){
+        catch (ClassNotFoundException f){
             System.out.println("Class not found in GameController."); 
         }
         
@@ -110,7 +110,7 @@ public class GameController implements ActionListener {
                     os.writeObject(gameModel); 
                     os.close(); 
                 }
-                catch(IOException e){
+                catch(IOException f){
                     System.out.println("IOException in GameController"); 
                 }
                 System.exit(0);
