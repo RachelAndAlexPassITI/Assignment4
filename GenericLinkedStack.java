@@ -31,11 +31,19 @@ public class GenericLinkedStack<E> implements Stack<E>, Serializable {
        size=0;
     }
 
-    // Returns true if this ArrayStack is empty
+    /**
+     * Method to check whether stack is empty. 
+     * 
+     * @return true or false
+     */ 
     public boolean isEmpty() {
         return (top==null);
     }
 
+    /**
+     * Pushes an element onto the stack
+     * 
+     */ 
     public void push( E elem ) {
         if (elem==null){
             throw new NullPointerException("Cannot stack null value.");
@@ -44,15 +52,19 @@ public class GenericLinkedStack<E> implements Stack<E>, Serializable {
         top = new Elem<E> (elem, top); // right side is executed before left
     }
 
+    /**
+     * Takes element from stack. 
+     * 
+     * @return saved
+     */  
     public E pop() {
         //shouldn't call pop() if object state is empty 
         //-> use an illegal state exception
         //this will activate anytime someone tries to pop() an empty stack
-        /*
+        
         if (isEmpty()){
-            throw new EmptyStackException(stack); 
+            throw new EmptyStackException(); 
         }
-        */
 
         E saved = top.value; //store value so we can return it later 
         top = top.next;
@@ -60,6 +72,11 @@ public class GenericLinkedStack<E> implements Stack<E>, Serializable {
     	return saved;
     }
 
+    /**
+     * Peek the top element on the stack
+     * 
+     * @return top.value
+     */ 
     public E peek() {
         if (top==null){
             throw new NullPointerException("Cannot peek null value.");
@@ -67,6 +84,11 @@ public class GenericLinkedStack<E> implements Stack<E>, Serializable {
         return top.value; 
     }
 
+    /**
+     * Getter method for the size of the stack
+     * 
+     * @return size
+     */ 
     public int getSize(){
         return size; 
     }

@@ -49,8 +49,6 @@ public class GameModel implements Cloneable, Serializable{
      */
 	private int currentSelectedColor;
 
-    
-
     /**
      * The size of the game.
      */
@@ -60,7 +58,6 @@ public class GameModel implements Cloneable, Serializable{
      * A 2 dimentionnal array of sizeOfGame*sizeOfGame recording the state of each dot
      */
 	private DotInfo[][] model;
-
 
    /**
      * The number of steps played since the last reset
@@ -393,6 +390,11 @@ public class GameModel implements Cloneable, Serializable{
         return numberCaptured;
     }
 
+    /**
+     * Method to get an existing saved game. Called in constructor of GameController.
+     * 
+     * @return savedModel
+     */ 
     public GameModel getSavedModel()
     {
         String fileName = "savedGame.ser"; 
@@ -419,6 +421,10 @@ public class GameModel implements Cloneable, Serializable{
         return (this); 
     }
 
+    /**
+     * Method to save a game. Called when quitting the game. 
+     * 
+     */ 
     public void saveModel()
     {
         try{
@@ -430,8 +436,7 @@ public class GameModel implements Cloneable, Serializable{
             fos.close(); 
         }
         catch(IOException f){
-            System.out.println(f);
-            System.out.println("IO exception while exiting because fuck you"); 
+        System.out.println("IOException when saving model.");  
         }
     }
 
@@ -492,10 +497,7 @@ public class GameModel implements Cloneable, Serializable{
 
             cloned.undoStack=undoStack;
             cloned.redoStack=redoStack;
-
-            System.out.println("Cloned: "+cloned.undoStack.getSize());
-            System.out.println("Original: "+undoStack.getSize());
-
+            
             return cloned;
         
 
