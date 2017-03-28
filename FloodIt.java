@@ -16,7 +16,7 @@ public class FloodIt {
      * @param args
      *            command line parameters
      */
-     public static void main(String[] args) throws CloneNotSupportedException{
+     public static void main(String[] args){
         int size = 10;
         //int size = 17;
         //int size = 22;

@@ -151,9 +151,9 @@ public class GameController implements ActionListener {
     private void redo()
     {
         gameModel=redoStack.peek();
-        gameView.setGameModel(gameModel);
-        gameView.update();  
+        gameView.setGameModel(gameModel);  
         undoStack.push(redoStack.pop());
+        gameView.update();
     }
 
     private void openSettingsPane()

@@ -144,13 +144,14 @@ public class GameView extends JFrame {
             undoButton.setEnabled(false);
         }
 
-        if(gameController.redoStack.getSize()>0)
+        if(gameController.redoStack.isEmpty())
         {
-            redoButton.setEnabled(true);
+            System.out.println("isEmpty is true");
+            redoButton.setEnabled(false);
         }
         else
         {
-            redoButton.setEnabled(false);
+            redoButton.setEnabled(true);
         }
         repaint();
     }

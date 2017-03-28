@@ -85,17 +85,4 @@ public class DotInfo implements Cloneable {
         return color;
     }
 
-    @Override
-    public Object clone()
-    {
-        try
-        {
-            return super.clone();
-        }
-        catch(CloneNotSupportedException e)
-        {
-            System.out.println("DotInfo does not support cloneable");
-            return this;
-        }
-    }
  }

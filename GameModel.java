@@ -200,7 +200,6 @@ public class GameModel implements Cloneable, Serializable{
      */   
     public void capture(int i, int j){
  		model[i][j].setCaptured(true);
-        System.out.println(model[i][j].getColor());
         if(initialDot==false)
         {
             initialDot=true;
