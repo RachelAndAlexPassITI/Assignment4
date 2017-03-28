@@ -20,9 +20,12 @@ public class GameView extends JFrame {
      */
     private DotButton[][] board;
 
+    /**
+    * jbuttons and jlabels that need to be accessd by more than one method in the class
+    */
     private JButton redoButton;
-
     private JButton undoButton;
+    private JLabel scoreLabel;
 
  
     /**
@@ -32,7 +35,7 @@ public class GameView extends JFrame {
  
     private GameController gameController;
 
-    private JLabel scoreLabel;
+    
     /**
      * Constructor used for initializing the Frame
      * 
@@ -115,6 +118,7 @@ public class GameView extends JFrame {
 
     }
 
+    
     public void setGameModel(GameModel gameModel)
     {
         this.gameModel=gameModel;

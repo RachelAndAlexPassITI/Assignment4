@@ -364,7 +364,7 @@ public class GameModel implements Cloneable, Serializable{
     /**
      * Setter method for numberCaptured
      * 
-     * @param val
+     * @param i
      *            the new value for numberCaptured
     */
     public void setNumberCaptured(int i)
@@ -375,7 +375,7 @@ public class GameModel implements Cloneable, Serializable{
     /**
      * Setter method for numberOfSteps
      * 
-     * @param val
+     * @param i
      *            the new value for numberOfSteps
     */
     public void setNumberOfSteps(int i)
