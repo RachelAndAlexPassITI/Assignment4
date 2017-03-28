@@ -1,4 +1,6 @@
-public class GenericLinkedStack<E> implements Stack<E> {
+import java.io.*;
+
+public class GenericLinkedStack<E> implements Stack<E>, Serializable {
 
     // E is the type of the elements of this stack. The specific type
     // will specified when a reference is declared and a stack is
@@ -13,7 +15,7 @@ public class GenericLinkedStack<E> implements Stack<E> {
     
     @SuppressWarnings( "unchecked" )
 
-    private static class Elem<E>{
+    private static class Elem<E> implements Serializable{
         private E value; //contains dot object or game model
         private Elem<E> next; //points to following game model version
 

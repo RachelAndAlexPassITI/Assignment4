@@ -430,6 +430,7 @@ public class GameModel implements Cloneable, Serializable{
             fos.close(); 
         }
         catch(IOException f){
+            System.out.println(f);
             System.out.println("IO exception while exiting because fuck you"); 
         }
     }
