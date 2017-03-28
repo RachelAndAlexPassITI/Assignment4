@@ -35,6 +35,8 @@ public class GameModel implements Cloneable, Serializable{
     public static final int NUMBER_OF_COLORS  = 6;
 
     public boolean initialDot;
+    public GenericLinkedStack<GameModel> undoStack;
+    public GenericLinkedStack<GameModel> redoStack;
 
     /**
      * The current selection color
@@ -91,6 +93,8 @@ public class GameModel implements Cloneable, Serializable{
     public void reset(){
 
     	model = new DotInfo[sizeOfGame][sizeOfGame];
+        undoStack=new GenericLinkedStack<GameModel>();
+        redoStack=new GenericLinkedStack<GameModel>();
 
     	for(int i = 0; i < sizeOfGame; i++){
 		   	for(int j = 0; j < sizeOfGame; j++){

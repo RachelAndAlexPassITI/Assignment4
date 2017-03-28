@@ -135,7 +135,7 @@ public class GameView extends JFrame {
         else
             scoreLabel.setText("Select Initial Dot");
 
-        if(gameController.undoStack.getSize()>1)
+        if(gameModel.undoStack.getSize()>1)
         {
             undoButton.setEnabled(true);
         }
@@ -144,9 +144,8 @@ public class GameView extends JFrame {
             undoButton.setEnabled(false);
         }
 
-        if(gameController.redoStack.isEmpty())
+        if(gameModel.redoStack.isEmpty())
         {
-            System.out.println("isEmpty is true");
             redoButton.setEnabled(false);
         }
         else

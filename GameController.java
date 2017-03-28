@@ -17,8 +17,6 @@ import java.nio.*;
 
 public class GameController implements ActionListener {
 
-    GenericLinkedStack<GameModel> undoStack;
-    GenericLinkedStack<GameModel> redoStack;
     /**
      * Reference to the view of the board
      */
@@ -66,8 +64,6 @@ public class GameController implements ActionListener {
             gameModel = new GameModel(size); 
         }
         
-        undoStack=new GenericLinkedStack<GameModel>();
-        redoStack=new GenericLinkedStack<GameModel>();
         flood(); 
         gameView = new GameView(gameModel, this);
         gameView.update(); 
@@ -97,7 +93,7 @@ public class GameController implements ActionListener {
             if(gameModel.initialDot==false)
             {
                 gameModel.capture(((DotButton)(e.getSource())).getRow(), ((DotButton)(e.getSource())).getColumn());
-                undoStack.push((GameModel)gameModel.clone());
+                gameModel.undoStack.push((GameModel)gameModel.clone());
                 gameView.update();
             }
 
@@ -139,8 +135,8 @@ public class GameController implements ActionListener {
 
     private void undo()
     {
-        redoStack.push(undoStack.pop());
-        gameModel=undoStack.peek();
+        gameModel.redoStack.push(gameModel.undoStack.pop());
+        gameModel=gameModel.undoStack.peek();
         System.out.println(gameModel);
         gameView.setGameModel(gameModel);
         gameView.update();
@@ -150,9 +146,9 @@ public class GameController implements ActionListener {
 
     private void redo()
     {
-        gameModel=redoStack.peek();
+        gameModel=gameModel.redoStack.peek();
         gameView.setGameModel(gameModel);  
-        undoStack.push(redoStack.pop());
+        gameModel.undoStack.push(gameModel.redoStack.pop());
         gameView.update();
     }
 
@@ -204,7 +200,7 @@ public class GameController implements ActionListener {
 
         System.out.println("End of settings pane: "+gameModel.getDiagonal());
         System.out.println("Orth: "+gameModel.getOrthogonal());
-        undoStack.push((GameModel)gameModel.clone());
+        gameModel.undoStack.push((GameModel)gameModel.clone());
 
 
     }
@@ -374,7 +370,7 @@ public class GameController implements ActionListener {
                 }
             }
         }
-        undoStack.push((GameModel)gameModel.clone());
+        gameModel.undoStack.push((GameModel)gameModel.clone());
         //System.out.println(gameModel.getNumberCaptured);
     }
 
