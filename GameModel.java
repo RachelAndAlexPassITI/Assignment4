@@ -18,10 +18,14 @@ import java.io.*;
  */
 public class GameModel implements Cloneable, Serializable{
 
+    /**
+    * the current settings
+    */
     private boolean diagonal;
     private boolean torus;
     private boolean plane;
     private boolean orthogonal;
+    public boolean initialDot;
 
     /**
      * predefined values to capture the color of a DotInfo
@@ -34,7 +38,9 @@ public class GameModel implements Cloneable, Serializable{
     public static final int COLOR_5           = 5;
     public static final int NUMBER_OF_COLORS  = 6;
 
-    public boolean initialDot;
+    /**
+    * The stacks of former gamemodels
+    **/
     public GenericLinkedStack<GameModel> undoStack;
     public GenericLinkedStack<GameModel> redoStack;
 
@@ -104,7 +110,6 @@ public class GameModel implements Cloneable, Serializable{
 
     	// initially, the top left DotInfo is captured
         initialDot=false;        
-       // currentSelectedColor = model[0][0].getColor();
 
     	numberOfSteps = 0;
         numberCaptured = 0;
@@ -114,16 +119,34 @@ public class GameModel implements Cloneable, Serializable{
         orthogonal=true;
     }
 
+    /**
+     * Setter method for diagonal
+     * 
+     * @param b
+     *            the new value for diagonal
+    */  
     public void setDiagonal(boolean b)
     {
         diagonal=b;
     }
 
+    /**
+     * Setter method for torus
+     * 
+     * @param b
+     *            the new value for torus
+    */  
     public void setTorus(boolean b)
     {
         torus=b;
     }
 
+    /**
+     * Setter method for plane
+     * 
+     * @param b
+     *            the new value for plane
+    */  
     public void setPlane(boolean b)
     {
         plane=b;
@@ -134,21 +157,41 @@ public class GameModel implements Cloneable, Serializable{
         orthogonal=b;
     }
 
+    /**
+     * Getter method for the plane setting
+     * 
+     * @return the value of the attribute plane
+     */  
     public boolean getPlane()
     {
         return plane;
     }
 
+    /**
+     * Getter method for the orthogonal setting
+     * 
+     * @return the value of the attribute orthogonal
+     */  
     public boolean getOrthogonal()
     {
         return orthogonal;
     }
 
+    /**
+     * Getter method for the diagonal setting
+     * 
+     * @return the value of the attribute diagonal
+     */  
     public boolean getDiagonal()
     {
         return diagonal;
     }
 
+    /**
+     * Getter method for the torus setting
+     * 
+     * @return the value of the attribute torus
+     */  
     public boolean getTorus()
     {
         return torus;
@@ -257,6 +300,15 @@ public class GameModel implements Cloneable, Serializable{
         return model[i][j];
     }
 
+    /**
+    *Setter method for model's dotInfo reference at (i,j)
+    * @param i
+    *   the x coordinate of the dot
+    * @param j
+    *   the y coordinate of the dot
+    *@param dotInfo
+    *   the new dotInfo
+    */
     public void set(int i,int j,DotInfo dotInfo)
     {
         model[i][j]=dotInfo;
@@ -298,26 +350,54 @@ public class GameModel implements Cloneable, Serializable{
         return b.toString();
     }
 
+    /**
+     * Setter method for initialDot
+     * 
+     * @param b
+     *            the new value for initialDot
+    */
     public void setInitialDot(boolean b)
     {
         initialDot=b;
     }
 
+    /**
+     * Setter method for numberCaptured
+     * 
+     * @param val
+     *            the new value for numberCaptured
+    */
     public void setNumberCaptured(int i)
     {
         numberCaptured=i;
     }
 
+    /**
+     * Setter method for numberOfSteps
+     * 
+     * @param val
+     *            the new value for numberOfSteps
+    */
     public void setNumberOfSteps(int i)
     {
         numberOfSteps=i;
     }
 
+    /**
+     * Getter method for numberCaptured
+     * 
+     * @return numberCaptured
+     */  
     public int getNumberCaptured()
     {
         return numberCaptured;
     }
 
+    /**
+    * override of method clone() from interface cloneable
+    * creates deep copy of object
+    * @return deep copy of object
+    */
     @Override
     public Object clone() 
     {
@@ -367,6 +447,12 @@ public class GameModel implements Cloneable, Serializable{
                     }
                 }
             }
+
+            cloned.undoStack=undoStack;
+            cloned.redoStack=redoStack;
+
+            System.out.println("Cloned: "+cloned.undoStack.getSize());
+            System.out.println("Original: "+undoStack.getSize());
 
             return cloned;
         
