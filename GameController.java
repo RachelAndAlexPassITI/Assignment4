@@ -25,6 +25,8 @@ public class GameController implements ActionListener {
      * Reference to the model of the game
      */
     private GameModel gameModel;
+
+    private String fileName; 
  
     /**
      * Constructor used for initializing the controller. It creates the game's view 
@@ -34,36 +36,30 @@ public class GameController implements ActionListener {
      *            the size of the board on which the game will be played
      */
     public GameController(int size) {
-        String fileName = "savedGame.ser"; 
+        fileName = "savedGame.ser"; 
         try
         {
-           ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
-           gameModel = (GameModel) is.readObject();
-           is.close(); 
-            
+            File file = new File(fileName); 
+            FileInputStream fis = new FileInputStream("savedGame.ser"); 
+            ObjectInputStream ois = new ObjectInputStream(fis); 
+            gameModel = (GameModel) ois.readObject();
+            ois.close();
+            fis.close();
+            file.delete();   
         }
-        /*
         catch (FileNotFoundException f)
         {
             gameModel = new GameModel(size);
-            try{
-                Files.delete(savedGame.ser); 
-            }
-            catch(IOException g){
-                System.out.println("IOException in GameController."); 
-            }
-        }
-        */
-        
+        }        
         catch (IOException f){
+            System.out.println("IOException in GameController"); 
             gameModel = new GameModel(size);
         }
-
         catch (ClassNotFoundException f){
             System.out.println("Class not found in GameController."); 
             gameModel = new GameModel(size); 
         }
-        
+
         flood(); 
         gameView = new GameView(gameModel, this);
         gameView.update(); 
@@ -106,12 +102,16 @@ public class GameController implements ActionListener {
 
             if (clicked.getText().equals("Quit")) {
                 try{
-                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("savedGame.ser"));
-                    os.writeObject(gameModel); 
-                    os.close(); 
+                    //ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(new File(fileName)));
+                    File file = new File(fileName);
+                    FileOutputStream fos = new FileOutputStream(file); 
+                    ObjectOutputStream oos = new ObjectOutputStream(fos); 
+                    oos.writeObject(gameModel);
+                    oos.close(); 
+                    fos.close(); 
                 }
                 catch(IOException f){
-                    System.out.println("IO exception but exiting because fuck you"); 
+                    System.out.println("IO exception while exiting because fuck you"); 
                     System.exit(0); 
                 }
                 
