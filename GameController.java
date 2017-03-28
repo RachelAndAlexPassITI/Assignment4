@@ -32,6 +32,8 @@ public class GameController implements ActionListener {
      * 
      * @param size
      *            the size of the board on which the game will be played
+     * @param b
+     *          if there was a size input from the command land
      */
     public GameController(int size, boolean b) {
         gameModel = new GameModel(size);
@@ -101,17 +103,20 @@ public class GameController implements ActionListener {
         } 
     }
 
+    /**
+    * undos the previous move
+    */
     private void undo()
     {
         gameModel.redoStack.push(gameModel.undoStack.pop());
         gameModel=gameModel.undoStack.peek();
-        System.out.println(gameModel);
         gameView.setGameModel(gameModel);
         gameView.update();
-        System.out.println("End of undo: "+gameModel.getDiagonal());
 
     }
-
+    /**
+    * redos the previous move
+    */
     private void redo()
     {
         gameModel=gameModel.redoStack.peek();
@@ -120,6 +125,9 @@ public class GameController implements ActionListener {
         gameView.update();
     }
 
+    /**
+    * opens the pane with options 
+    */
     private void openSettingsPane()
     {
         JPanel panel=new JPanel();
@@ -127,10 +135,6 @@ public class GameController implements ActionListener {
         JRadioButton torusButton=new JRadioButton("Torus", gameModel.getTorus());
         JRadioButton orthButton=new JRadioButton("Orthongonal", gameModel.getOrthogonal());
         JRadioButton diagButton=new JRadioButton("Diagonals", gameModel.getDiagonal());
-        System.out.println("Start of settings pane: "+gameModel.getDiagonal());
-        System.out.println("Orth: "+gameModel.getOrthogonal());
-
-
 
         ButtonGroup group1=new ButtonGroup();
         group1.add(planeButton);
@@ -165,9 +169,6 @@ public class GameController implements ActionListener {
             gameModel.setDiagonal(true);
         else
             gameModel.setDiagonal(false);
-
-        System.out.println("End of settings pane: "+gameModel.getDiagonal());
-        System.out.println("Orth: "+gameModel.getOrthogonal());
         gameModel.undoStack.push((GameModel)gameModel.clone());
 
 
@@ -339,7 +340,6 @@ public class GameController implements ActionListener {
             }
         }
         gameModel.undoStack.push((GameModel)gameModel.clone());
-        //System.out.println(gameModel.getNumberCaptured);
     }
 
 
