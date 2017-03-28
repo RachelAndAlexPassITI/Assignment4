@@ -408,10 +408,10 @@ public class GameModel implements Cloneable, Serializable{
         }
         catch (FileNotFoundException f)
         {
-            System.out.println("FileNotFoundException in GameModel.");
+            
         }        
         catch (IOException f){
-            System.out.println("IOException in GameModel");
+            
         }
         catch (ClassNotFoundException f){
             System.out.println("Class not found in GameModel.");  

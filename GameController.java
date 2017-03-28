@@ -33,9 +33,12 @@ public class GameController implements ActionListener {
      * @param size
      *            the size of the board on which the game will be played
      */
-    public GameController(int size) {
+    public GameController(int size, boolean b) {
         gameModel = new GameModel(size);
-        gameModel=gameModel.getSavedModel(); 
+        if(!b)
+        {
+            gameModel=gameModel.getSavedModel(); 
+        }
         
         gameView = new GameView(gameModel, this);
         flood(); 

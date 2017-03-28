@@ -84,6 +84,13 @@ public class DotButton extends JButton {
     	setBorderPainted(false);
     }
 
+    /**
+     * Constructor used for initializing a cell of a specified color.
+     * @param color
+     *            specifies the color of this cell
+     * @param iconSize
+     *            specifies the size to use, one of SMALL_SIZE, MEDIUM_SIZE or MEDIUM_SIZE
+     */
     public DotButton(int color, int iconSize) {
         this(-1,-1,color,iconSize);
     }
