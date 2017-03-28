@@ -393,6 +393,47 @@ public class GameModel implements Cloneable, Serializable{
         return numberCaptured;
     }
 
+    public GameModel getSavedModel()
+    {
+        String fileName = "savedGame.ser"; 
+        GameModel savedModel; 
+        try
+        {
+            File file = new File(fileName); 
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file)); 
+            savedModel = (GameModel) ois.readObject();
+            ois.close();
+            file.delete();   
+            return savedModel;
+        }
+        catch (FileNotFoundException f)
+        {
+            System.out.println("FileNotFoundException in GameModel.");
+        }        
+        catch (IOException f){
+            System.out.println("IOException in GameModel");
+        }
+        catch (ClassNotFoundException f){
+            System.out.println("Class not found in GameModel.");  
+        }
+        return (this); 
+    }
+
+    public void saveModel()
+    {
+        try{
+            File file = new File("savedGame.ser");
+            FileOutputStream fos = new FileOutputStream(file); 
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file)); 
+            oos.writeObject(this);
+            oos.close(); 
+            fos.close(); 
+        }
+        catch(IOException f){
+            System.out.println("IO exception while exiting because fuck you"); 
+        }
+    }
+
     /**
     * override of method clone() from interface cloneable
     * creates deep copy of object
