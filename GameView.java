@@ -112,18 +112,13 @@ public class GameView extends JFrame {
         southPanel.setBackground(Color.WHITE);
         add(southPanel, BorderLayout.SOUTH);
 
-        setLocationRelativeTo(null); 
-
     	pack();
     	//setResizable(false);
     	setVisible(true);
 
     }
 
-    /**
-     * Setter method for gameModel.
-     * 
-     */     
+    
     public void setGameModel(GameModel gameModel)
     {
         this.gameModel=gameModel;

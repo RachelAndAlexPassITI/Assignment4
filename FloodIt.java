@@ -27,11 +27,11 @@ public class FloodIt {
                 size = Integer.parseInt(args[0]);
                 input=true;
                 if(size<10){
-                    System.out.println("Invalide argument, using default...");
+                    System.out.println("Invalid argument, using default...");
                     size = 12;
                 }
             } catch(NumberFormatException e){
-                System.out.println("Invalide argument, using default...");
+                System.out.println("Invalid argument, using default...");
             }
         }
         GameController game = new GameController(size, input);
