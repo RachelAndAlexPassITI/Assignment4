@@ -52,7 +52,7 @@ public class GameView extends JFrame {
         this.gameController = gameController;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	setBackground(Color.WHITE);
+        setBackground(Color.WHITE);
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
@@ -68,7 +68,7 @@ public class GameView extends JFrame {
                 panel.add(board[row][column]);
             }
         }
-    	add(panel, BorderLayout.CENTER);
+        add(panel, BorderLayout.CENTER);
 
         JButton buttonReset = new JButton("Reset");
         buttonReset.setFocusPainted(false);
@@ -112,13 +112,18 @@ public class GameView extends JFrame {
         southPanel.setBackground(Color.WHITE);
         add(southPanel, BorderLayout.SOUTH);
 
-    	pack();
-    	//setResizable(false);
-    	setVisible(true);
+        setLocationRelativeTo(null); 
+
+        pack();
+        //setResizable(false);
+        setVisible(true);
 
     }
 
-    
+    /**
+     * Setter method for gameModel.
+     * 
+     */     
     public void setGameModel(GameModel gameModel)
     {
         this.gameModel=gameModel;
