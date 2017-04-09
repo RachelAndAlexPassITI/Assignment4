@@ -7,22 +7,22 @@ public class TestLinkedStack {
 
     public static void main(String[] args) {
 
-	StudentInfo.display();
+	//StudentInfo.display();
 
 	LinkedStack<Integer> s;
 
-	s = new LinkedStack<Integer>();
-	System.out.println(s);
+	//s = new LinkedStack<Integer>();
+	//System.out.println(s);
 
-	s.unroll();
-	System.out.println(s);
+	//s.unroll();
+	//System.out.println(s);
 	
-	for (int i=0; i<5; i++) {
-	    s.push(i);
-	    System.out.println(s);
-	    s.unroll();
-	    System.out.println(s);
-	}
+	//for (int i=0; i<5; i++) {
+	  //  s.push(i);
+	    //System.out.println(s);
+	    //s.unroll();
+	    //System.out.println(s);
+	//}
 
 	s = new LinkedStack<Integer>();
 	System.out.println(s);

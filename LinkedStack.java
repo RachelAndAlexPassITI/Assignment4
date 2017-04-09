@@ -79,10 +79,27 @@ public class LinkedStack<E> implements Stack<E> {
      * the bottom of the stack.
      */
 
-    public void roll() {
+    public void roll() 
+    {
+        if(!isEmpty())
+        {
+            E temp1=pop(); //to save current state for use
+            rollHelper(temp1);
+        }
+    }
 
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
-
+    private void rollHelper(E temp1)
+    {   
+        if(isEmpty())
+        {
+            push(temp1);
+        }
+        else
+        {
+            E first=pop();
+            rollHelper(temp1);
+            push(first);
+        }
     }
 
     /** Removes the botttom element. The element is inserted on the
