@@ -25,7 +25,7 @@ public interface FrequencyTable {
 
     void init(String key);
 
-    /** The method updates the frequency associed with the key by one.
+    /** The method updates the frequency associated with the key by one.
      *
      *  @param key key with which the specified value is to be associated
      */
