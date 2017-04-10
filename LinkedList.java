@@ -31,24 +31,31 @@ public class LinkedList<E> {
     private class LinkedListIterator implements Iterator<E> {
     
         private Elem<E> current;
+        private int stopAt;
+        private int counter;
     
-        private LinkedListIterator() {
-            current = head;
+        private LinkedListIterator(int last, int first)
+        {
+            current=head;
+            stopAt=last;
+            counter=first;
+
         }
     
         public E next() {
       
-            if (current.next == head) {
+            if (current.next == head || counter>stopAt) {
         	throw new NoSuchElementException();
             }
       
             current = current.next ; // move the cursor forward
-      
+            counter++;
             return current.value ;
         }
     
         public boolean hasNext() {
-            return current.next != head;
+
+            return current.next != head && counter<=stopAt; 
         }
     
     }
@@ -70,7 +77,7 @@ public class LinkedList<E> {
      */
   
     public Iterator<E> iterator() {
-        return new LinkedListIterator();
+        return new LinkedListIterator(size-1, 0);
     }
     
     /**
@@ -80,10 +87,8 @@ public class LinkedList<E> {
      * @return an iterator for this list
      */
 
-    public Iterator<E> iterator(int stop) {
-
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
-	
+    public Iterator<E> iterator(int stop){
+        return new LinkedListIterator(stop,0);
     }
     
     /**
@@ -95,9 +100,8 @@ public class LinkedList<E> {
      * @return an iterator for this list
      */
 
-    public Iterator<E> iterator(int start, int stop) {
-
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+    public Iterator<E> iterator(int start, int stop){
+        return new LinkedListIterator(stop,start);
 	
     }
 
