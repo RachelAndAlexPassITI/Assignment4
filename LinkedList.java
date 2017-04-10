@@ -39,6 +39,10 @@ public class LinkedList<E> {
             current=head;
             stopAt=last;
             counter=first;
+            for(int i=0; i<counter; i++)
+            {
+                current=current.next;
+            }
 
         }
     
