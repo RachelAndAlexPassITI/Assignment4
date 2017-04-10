@@ -102,14 +102,49 @@ public class LinkedStack<E> implements Stack<E> {
         }
     }
 
+    
     /** Removes the botttom element. The element is inserted on the
      * top of the stack.
      */
 
-    public void unroll() {
+    E lastTail;
+    public void unroll() 
+    {
+        lastTail=null;
+        if(!isEmpty())
+        {
+            E temp=pop();
+            if(!isEmpty())
+            {
+                push(temp);
+                unrollHelper();
+                push(lastTail);
+            }
+            else
+            {
+                push(temp);
+            }
 
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+        }
 	
+    }
+
+    private void unrollHelper()
+    {
+        E current=pop();
+        E temp=pop();
+        if(isEmpty())
+        {
+            lastTail=temp;
+            push(current);
+        }
+        else
+        {
+            push(temp);
+            unrollHelper();
+            push(current);
+        }
+        
     }
 
     /** Returns a string representation of the stack.
