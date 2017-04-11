@@ -23,7 +23,8 @@ public class LinkedStack<E> implements Stack<E> {
     
     private Elem<E> top;
 
-    /** Returns <code>true</code> if this stack is empty, and
+    /** 
+    *Returns <code>true</code> if this stack is empty, and
      * <code>false</code> otherwise.
      *
      * @return <code>true</code> if this stack is empty, and
@@ -34,7 +35,8 @@ public class LinkedStack<E> implements Stack<E> {
         return top == null;
     }
 
-    /** Inserts an element onto the stack.
+    /** 
+    *Inserts an element onto the stack.
      *
      * @param value the element to be inserted
      */
@@ -60,7 +62,8 @@ public class LinkedStack<E> implements Stack<E> {
         return top.value;
     }
 
-    /** Removes and returns the top element.
+    /** 
+    *Removes and returns the top element.
      *
      * @return the top element
      */
@@ -88,6 +91,11 @@ public class LinkedStack<E> implements Stack<E> {
         }
     }
 
+    /** 
+    *helper method for roll()
+    * implements the recursive function
+    * @param temp1 current element
+    */
     private void rollHelper(E temp1)
     {   
         if(isEmpty())
@@ -129,6 +137,10 @@ public class LinkedStack<E> implements Stack<E> {
 	
     }
 
+    /** 
+    *helper method for unroll()
+    * implements the recursive function
+    */
     private void unrollHelper()
     {
         E current=pop();
@@ -147,7 +159,8 @@ public class LinkedStack<E> implements Stack<E> {
         
     }
 
-    /** Returns a string representation of the stack.
+    /** 
+    *Returns a string representation of the stack.
      *
      * @return a string representation
      */

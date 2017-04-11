@@ -49,7 +49,7 @@ public class LinkedList<E> {
         public E next() {
       
             if (current.next == head || counter>stopAt) {
-        	throw new NoSuchElementException();
+            throw new NoSuchElementException();
             }
       
             current = current.next ; // move the cursor forward
@@ -108,6 +108,7 @@ public class LinkedList<E> {
         return new LinkedListIterator(stop,start);
 	
     }
+
 
     /** Returns the size of the list.
      *
