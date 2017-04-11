@@ -11,7 +11,7 @@ public class TreeFrequencyTable implements FrequencyTable {
     // Stores the elements of this binary search tree (frequency
     // table)
     
-    private static class Elem {
+    protected static class Elem {
     
         private String key;
         private long count;
@@ -56,8 +56,12 @@ public class TreeFrequencyTable implements FrequencyTable {
         boolean flag = false;
         Elem current = root; 
         
-        while(!flag){            
-            if (key.compareTo(current.key)<0){
+        while(!flag){    
+            if(key.compareTo(current.key)==0){
+                flag = true;
+                //throw new IllegalArgumentException("already in table -> in init");
+            }        
+            else if (key.compareTo(current.key)<0){
                 if (current.left==null){
                     current.left=new Elem(key);
                     flag=true; //element was placed, can stop iterating through tree
@@ -73,8 +77,7 @@ public class TreeFrequencyTable implements FrequencyTable {
                 else
                     current=current.right;
             }
-            //else
-                //throw new IllegalArgumentException("already in table -> in init");
+            
             
         } //end while loop
         size++;
