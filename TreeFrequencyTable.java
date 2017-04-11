@@ -29,6 +29,8 @@ public class TreeFrequencyTable implements FrequencyTable {
 
     private Elem root = null; // A reference to the root element
     private int size = 0; // The size of the tree
+    private LinkedList<String> keysList; //stores all the strings
+    private long[] countList; //stores all the numbers 
 
     /** The size of the frequency table.
      *
@@ -46,8 +48,36 @@ public class TreeFrequencyTable implements FrequencyTable {
      */
   
     public void init(String key) {
-    
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+        if (key==null)
+            throw new IllegalArgumentException("null in init");
+        if (root==null)
+            root=new Elem(key);
+
+        boolean flag = false;
+        Elem current = root; 
+        
+        while(!flag){            
+            if (key.compareTo(current.key)<0){
+                if (current.left==null){
+                    current.left=new Elem(key);
+                    flag=true; //element was placed, can stop iterating through tree
+                }
+                else 
+                    current=current.left;
+            }
+            else if (key.compareTo(current.key)>0){
+                if(current.right==null){
+                    current.right=new Elem(key);
+                    flag=true;
+                }
+                else
+                    current=current.right;
+            }
+            //else
+                //throw new IllegalArgumentException("already in table -> in init");
+            
+        } //end while loop
+        size++;
     
     }
   
@@ -57,9 +87,26 @@ public class TreeFrequencyTable implements FrequencyTable {
      */
   
     public void update(String key) {
-    
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+        Elem current=root;
+        boolean flag=false;
+        int counter=0;
 
+        while(counter<size){
+            if (key.compareTo(current.key)==0){
+                current.count++; 
+                flag=true;
+            }
+            else if (key.compareTo(current.key)<0)
+                current=current.left;
+            else
+                current=current.right;
+            
+
+            counter++;
+        }
+        if (flag==false)
+            throw new NoSuchElementException("not in table -> in update method");
+    
     }
   
     /**
@@ -71,8 +118,22 @@ public class TreeFrequencyTable implements FrequencyTable {
      */
   
     public long get(String key) {
-    
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+        Elem current=root;
+        int counter=0;
+
+        while(counter<size){
+            if (key.compareTo(current.key)==0){
+                return current.count;
+            }
+            else if (key.compareTo(current.key)<0)
+                current=current.left;
+            else
+                current=current.right;
+
+            counter++;
+        }
+
+        throw new NoSuchElementException("not in table -> in get method");
 
     }
   
@@ -83,9 +144,20 @@ public class TreeFrequencyTable implements FrequencyTable {
      */
 
     public LinkedList<String> keys() {
+        keysList = new LinkedList<String>(); 
 
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+        inOrder1(root);
 
+        return keysList; 
+
+    }
+
+    public void inOrder1(Elem current){
+        if (current!=null){
+            inOrder1(current.left);
+            keysList.addLast(current.key);
+            inOrder1(current.right);
+        }
     }
 
     /** Returns the values in the order specified by the method compareTo of the key
@@ -95,9 +167,22 @@ public class TreeFrequencyTable implements FrequencyTable {
      */
 
     public long[] values() {
+        int counter=0; 
+        countList = new long[size];
 
-	throw new UnsupportedOperationException("IMPLEMENT THIS METHOD");
+        inOrder2(root,counter);
 
+        return countList;
+
+    }
+
+    public void inOrder2(Elem current, int counter){
+        if (current!=null){
+            inOrder2(current.left, counter);
+            countList[counter]=current.count;
+            counter++;
+            inOrder2(current.right,counter);
+        }
     }
 
     /** Returns a String representation of the tree.
